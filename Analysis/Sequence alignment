@@ -1,0 +1,32 @@
+from Bio import AlignIO
+from Bio.Align.Applications import ClustalOmegaCommandline
+import os
+
+# Define input and output file paths
+input_files = {
+    "HIV_env": "data/HIV_env_clean.fasta",
+    "Human_receptors": "data/Human_receptors_clean.fasta"
+}
+
+output_files = {
+    "HIV_env": "data/HIV_env_aligned.fasta",
+    "Human_receptors": "data/Human_receptors_aligned.fasta"
+}
+
+# Clustal Omega executable path (modify if needed)
+clustalo_path = "clustalo"  # Ensure Clustal Omega is installed and in PATH
+
+def align_sequences(input_fasta, output_fasta):
+    """Runs Clustal Omega to align sequences."""
+    clustal_cline = ClustalOmegaCommandline(clustalo_path, infile=input_fasta, outfile=output_fasta, verbose=True, auto=True)
+    
+    print(f"🔄 Aligning {input_fasta} ...")
+    stdout, stderr = clustal_cline()  # Run Clustal Omega
+    print(f"✅ Alignment saved to {output_fasta}\n")
+
+# Run alignment for each dataset
+for key in input_files:
+    if os.path.exists(input_files[key]):
+        align_sequences(input_files[key], output_files[key])
+    else:
+        print(f"⚠️ File not found: {input_files[key]} (Skipping...)")
