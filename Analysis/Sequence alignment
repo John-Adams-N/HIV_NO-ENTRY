@@ -2,10 +2,10 @@ import os
 import subprocess
 import shutil
 
-# Define input and output file paths
+# Define input and output file paths (using trimmed files)
 input_files = {
-    "HIV_env": "data/HIV_env_clean.fasta",
-    "Human_receptors": "data/Human_receptors_clean.fasta"
+    "HIV_env": "data/HIV_env_trimmed.fasta",
+    "Human_receptors": "data/Human_receptors_trimmed.fasta"
 }
 
 output_files = {
